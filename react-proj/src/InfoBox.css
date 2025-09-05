@@ -1,0 +1,15 @@
+.InfoBox{
+    text-align: center;
+}
+.InfoBox h2{
+    font-size: 2em;
+    margin: 0.2em 0;
+}
+.InfoBox p{
+    font-size: 1.2em;
+    margin: 0.2em 0;
+}
+.cardContainer{
+    display: flex;
+    justify-content: center;
+}
