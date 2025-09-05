@@ -67,7 +67,6 @@ export default function SearchBox() {
         />
         <Button variant="contained" type="submit" style={{ height: "56px" }}>
           Search
-          <h3>Weather is rainy</h3>
         </Button>
       </form>
 
