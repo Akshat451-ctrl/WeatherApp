@@ -27,12 +27,16 @@ export default function InfoBox({ info }) {
           <Typography gutterBottom variant="h5" component="div">
             {info.city}, {info.country}
           </Typography>
-          <Typography variant="body2" sx={{ color: "text.secondary" }}>
-            <div>🌡 Temperature = {info.temperature}</div>
-            <div>🌥 Condition = {info.condition}</div>
-            <div>💧 Humidity = {info.humidity}</div>
-            <div>🌬 Winds = {info.winds}</div>
-          </Typography>
+                      <Typography variant="body2" component="div" sx={{ color: 'text.secondary' }}>
+              <div>City = {info.city}</div>
+              <div>Temperature = {info.temperature}</div>
+              <div>Condition = {info.condition}</div>
+              <div>Humidity = {info.humidity}</div>
+              <div>Winds = {info.winds}</div>
+              <div>Local Time = {info.localTime}</div> {/* ✅ add time here */}
+            </Typography>
+
+
         </CardContent>
         <CardActions />
       </Card>
