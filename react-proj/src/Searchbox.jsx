@@ -1,14 +1,13 @@
+// SearchBox.jsx
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useState } from 'react';
-import InfoBox from './InfoBox';
 
-export default function SearchBox() {
+export default function SearchBox({ setWeather }) {  // Add prop for setWeather
   const Api_Url = "https://api.openweathermap.org/data/2.5/weather";
   const Api_Key = "9cf95208cbefe885f8d06b07318cc75f";
 
   let [city, setCity] = useState("");
-  let [weather, setWeather] = useState(null);
   let [error, setError] = useState("");
   let [recentCities, setRecentCities] = useState([]);
   let [showRecent, setShowRecent] = useState(false);
@@ -18,11 +17,12 @@ export default function SearchBox() {
       let response = await fetch(`${Api_Url}?q=${city}&appid=${Api_Key}&units=metric`);
       let jsonResponse = await response.json();
 
-      if (city && !recentCities.includes(city)) {
-        setRecentCities([city, ...recentCities]);
-      }
-
       if (response.ok) {
+        // Add to recent cities only on success
+        if (city && !recentCities.includes(city)) {
+          setRecentCities([city, ...recentCities]);
+        }
+
         // Local time calculation
         const targetDate = new Date(Date.now() + jsonResponse.timezone * 1000);
 
@@ -40,10 +40,10 @@ export default function SearchBox() {
           condition: jsonResponse.weather[0].description,
           humidity: `${jsonResponse.main.humidity}%`,
           winds: `${jsonResponse.wind.speed} m/s`,
-          localTime: timeStr, // ✅ ab sahi se set hoga
+          localTime: timeStr,
         };
 
-        setWeather(newWeather);
+        setWeather(newWeather);  // Use the prop to set parent's weather state
         setError("");
       } else {
         setWeather(null);
@@ -110,8 +110,7 @@ export default function SearchBox() {
         </div>
       )}
 
-      {/* Agar weather data hai toh InfoBox dikhao */}
-      {weather && <InfoBox info={weather} />}
+      {/* Remove the InfoBox rendering from here; it's handled in the parent */}
     </div>
   );
 }
